@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 
-const TOKEN_KEY = 'tripvault_token';
+export const TOKEN_KEY = 'tripvault_token';
 
 interface AuthContextType {
   token: string | null;

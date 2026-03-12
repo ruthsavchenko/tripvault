@@ -1,19 +1,14 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
-import { useAuth } from './store/AuthContext';
+import { TOKEN_KEY } from './store/AuthContext';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import TripsPage from './pages/TripsPage';
+import TripDetailPage from './pages/TripDetailPage';
+import AppLayout from './layouts/AppLayout';
 
 function ProtectedRoute() {
-  const { isAuthenticated } = useAuth();
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
-}
-
-function TripsPage() {
-  return <div>Trips page (coming soon)</div>;
-}
-
-function TripDetailPage() {
-  return <div>Trip detail page (coming soon)</div>;
+  const token = localStorage.getItem(TOKEN_KEY);
+  return token ? <Outlet /> : <Navigate to="/login" replace />;
 }
 
 export default function App() {
@@ -22,9 +17,11 @@ export default function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<Navigate to="/trips" replace />} />
-        <Route path="/trips" element={<TripsPage />} />
-        <Route path="/trips/:id" element={<TripDetailPage />} />
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<Navigate to="/trips" replace />} />
+          <Route path="/trips" element={<TripsPage />} />
+          <Route path="/trips/:id" element={<TripDetailPage />} />
+        </Route>
       </Route>
     </Routes>
   );

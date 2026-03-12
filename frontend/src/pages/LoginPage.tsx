@@ -17,7 +17,7 @@ import { useAuthControllerLogin } from '../api';
 import { useAuth } from '../store/AuthContext';
 
 interface AuthResponse {
-  access_token: string;
+  accessToken: string;
 }
 
 const schema = z.object({
@@ -41,9 +41,9 @@ export default function LoginPage() {
   const { mutate, isPending } = useAuthControllerLogin({
     mutation: {
       onSuccess: (data) => {
-        const token = (data as unknown as AuthResponse)?.access_token;
+        const token = (data as unknown as AuthResponse)?.accessToken;
         login(token);
-        navigate('/trips');
+        navigate('/trips', { replace: true });
       },
       onError: () => {
         setServerError('Invalid email or password');
