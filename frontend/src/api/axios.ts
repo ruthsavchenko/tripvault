@@ -4,7 +4,7 @@ import type { AxiosRequestConfig } from 'axios';
 const TOKEN_KEY = 'tripvault_token';
 
 const instance = axios.create({
-  baseURL: '/api/v1',
+  baseURL: '/',
 });
 
 instance.interceptors.request.use((config) => {

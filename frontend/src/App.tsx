@@ -1,17 +1,11 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { useAuth } from './store/AuthContext';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function ProtectedRoute() {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
-}
-
-function LoginPage() {
-  return <div>Login page (coming soon)</div>;
-}
-
-function RegisterPage() {
-  return <div>Register page (coming soon)</div>;
 }
 
 function TripsPage() {
