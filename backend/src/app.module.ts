@@ -16,15 +16,11 @@ import { MembersModule } from './members/members.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => ({
-        type: 'mssql',
-        host: config.get('DB_HOST'),
-        port: +config.getOrThrow<string>('DB_PORT'),
-        username: config.get('DB_USERNAME'),
-        password: config.get('DB_PASSWORD'),
-        database: config.get('DB_DATABASE'),
+        type: 'postgres',
+        url: config.getOrThrow('DATABASE_URL'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
-        options: { encrypt: true, trustServerCertificate: false },
+        ssl: { rejectUnauthorized: false },
       }),
       inject: [ConfigService],
     }),
