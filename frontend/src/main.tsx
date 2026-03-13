@@ -8,7 +8,7 @@ import { createTripVaultTheme } from './theme';
 import App from './App.tsx';
 
 const queryClient = new QueryClient();
-const theme = createTripVaultTheme('dark');
+const theme = createTripVaultTheme('light');
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
